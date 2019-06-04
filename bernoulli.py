@@ -71,4 +71,8 @@ def create_column_category(list_votes):
         dataframe = pd.DataFrame(list_votes[i])
         dataframe['category'] = (i+1)
         list_df_categories.append(dataframe)
-    return list_df_categories
+    df = pd.concat(list_df_categories)
+    df = df.reset_index()
+    df = df.replace({False: 0, True: 1})
+    df = df.drop(['index'], axis=1)
+    return df
